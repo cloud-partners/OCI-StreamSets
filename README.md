@@ -37,3 +37,7 @@ Remove ssh private keys from Utility host
 Replace the authorized_keys file in /root/.ssh/ on all hosts with the backup copy 
 
 	sudo mv /root/.ssh/authorized_keys.bak /root/.ssh/authorized_keys
+	
+##Using StreamSets
+
+Please navigate to [Assigned IP Address]:18630 and log into StreamSets Data Collector  using "ADMIN" as the user name and password.
