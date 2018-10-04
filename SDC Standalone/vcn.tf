@@ -2,33 +2,33 @@ variable "VPC-CIDR" {
   default = "10.0.0.0/16"
 }
 
-resource "oci_core_virtual_network" "cloudera_vcn" {
+resource "oci_core_virtual_network" "DataCollector_vcn" {
   cidr_block = "${var.VPC-CIDR}"
   compartment_id = "${var.compartment_ocid}"
-  display_name = "cloudera_vcn"
-  dns_label = "cdhvcn"
+  display_name = "DataCollector_vcn"
+  dns_label = "DataCollectorvcn"
 }
 
-resource "oci_core_internet_gateway" "cloudera_internet_gateway" {
+resource "oci_core_internet_gateway" "DataCollector_internet_gateway" {
     compartment_id = "${var.compartment_ocid}"
-    display_name = "cloudera_internet_gateway"
-    vcn_id = "${oci_core_virtual_network.cloudera_vcn.id}"
+    display_name = "DataCollector_internet_gateway"
+    vcn_id = "${oci_core_virtual_network.DataCollector_vcn.id}"
 }
 
 resource "oci_core_route_table" "RouteForComplete" {
     compartment_id = "${var.compartment_ocid}"
-    vcn_id = "${oci_core_virtual_network.cloudera_vcn.id}"
+    vcn_id = "${oci_core_virtual_network.DataCollector_vcn.id}"
     display_name = "RouteTableForComplete"
     route_rules {
         cidr_block = "0.0.0.0/0"
-        network_entity_id = "${oci_core_internet_gateway.cloudera_internet_gateway.id}"
+        network_entity_id = "${oci_core_internet_gateway.DataCollector_internet_gateway.id}"
     }
 }
 
 resource "oci_core_security_list" "PublicSubnet" {
     compartment_id = "${var.compartment_ocid}"
     display_name = "Public Subnet"
-    vcn_id = "${oci_core_virtual_network.cloudera_vcn.id}"
+    vcn_id = "${oci_core_virtual_network.DataCollector_vcn.id}"
     egress_security_rules = [{
         destination = "0.0.0.0/0"
         protocol = "6"
@@ -45,6 +45,15 @@ resource "oci_core_security_list" "PublicSubnet" {
         tcp_options {
             "max" = 80
             "min" = 80
+        }
+        protocol = "6"
+        source = "0.0.0.0/0"
+    }]
+	}]
+    ingress_security_rules = [{
+        tcp_options {
+            "max" = 18630
+            "min" = 18630
         }
         protocol = "6"
         source = "0.0.0.0/0"
@@ -84,7 +93,7 @@ resource "oci_core_subnet" "public" {
   vcn_id = "${oci_core_virtual_network.cloudera_vcn.id}"
   route_table_id = "${oci_core_route_table.RouteForComplete.id}"
   security_list_ids = ["${oci_core_security_list.PublicSubnet.id}"]
-  dhcp_options_id = "${oci_core_virtual_network.cloudera_vcn.default_dhcp_options_id}"
+  dhcp_options_id = "${oci_core_virtual_network.DataCollector_vcn.default_dhcp_options_id}"
   dns_label = "public${count.index + 1}"
 }
 
