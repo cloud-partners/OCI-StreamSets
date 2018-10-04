@@ -1,10 +1,10 @@
-resource "oci_core_instance" "Sandbox" {
+resource "oci_core_instance" "DataCollector" {
   count = "1"
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1],"name")}"
   compartment_id      = "${var.compartment_ocid}"
-  display_name        = "CDH Sandbox"
-  hostname_label      = "CDH-Sandbox"
-  shape               = "VM.Standard2.8"
+  display_name        = "DataCollector"
+  hostname_label      = "DataCollector"
+  shape               = "VM.Standard1.2"
   subnet_id	      = "${oci_core_subnet.public.*.id[var.AD - 1]}"
 
   source_details {
