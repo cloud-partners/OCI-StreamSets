@@ -53,7 +53,7 @@ resource "null_resource" "cdh-setup" {
       connection {
         agent = false
         timeout = "10m"
-        host = "data.oci_core_vnic.DataCollector_vnic.public_ip_address"
+        host = "${data.oci_core_vnic.DataCollector_vnic.public_ip_address}"
         user = "opc"
         private_key = "${var.ssh_private_key}"
       }
