@@ -22,3 +22,16 @@ data "oci_core_vnic" "bastion_vnic" {
 data "oci_core_vnic" "utility_node_vnic" {
   vnic_id = "${lookup(data.oci_core_vnic_attachments.utility_node_vnics.vnic_attachments[0],"vnic_id")}"
 }
+
+# Get list of VNICS for DataCollector
+
+data "oci_core_vnic_attachments" "DataCollector_vnics" {
+  compartment_id      = "${var.compartment_ocid}"
+  availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1],"name")}"
+  instance_id = "${oci_core_instance.DataCollector.id}"
+}
+# Get VNIC ID for first VNIC on DataCollector
+
+data "oci_core_vnic" "DataCollector_vnic" {
+  vnic_id = "${lookup(data.oci_core_vnic_attachments.DataCollector_vnics.vnic_attachments[0],"vnic_id")}"
+}
