@@ -67,4 +67,3 @@ resource "null_resource" "cdh-setup" {
   ]
     }
 }
-    
