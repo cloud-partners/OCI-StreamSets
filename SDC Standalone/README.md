@@ -1,4 +1,4 @@
-# Cloudera Docker VM Version
+# StreamSets Data Collector Standalone Instance
 Note that this template specifically uses wget to fetch a specific version of StreamSets Data Collector (SDC) 3.5 to run on an Oracle Linux 7.2 instance.
 
 # Usage Guide
