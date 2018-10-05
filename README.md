@@ -1,39 +1,38 @@
-# Usage Guide
+						Getting Started
+What is StreamSets Data Collector?
 
-## PREREQUISITES
+StreamSets Data CollectorTM is a lightweight, powerful design and execution engine that streams data in real time. Use Data Collector to route and process data in your data streams.
 
-Installation has a dependency on Terraform being installed and configured for the user tenancy.   As such an "env-vars" file is included with this package that contains all the necessary environment variables.  This file should be updated with the appropriate values prior to installation.  To source this file prior to installation, either reference it in your .rc file for your shell's or run the following:
+To define the flow of data, you design a pipeline in Data Collector. A pipeline consists of stages that represent the origin and destination of the pipeline, and any additional processing that you want to perform. After you design the pipeline, you click Start and Data Collector goes to work.
 
-        source env-vars
+Data Collector processes data when it arrives at the origin and waits quietly when not needed. You can view real-time statistics about your data, inspect data as it passes through the pipeline, or take a close look at a snapshot of data.
 
-## Password & User Details
 
-Modify the script startup.sh and look for the MAIN CLUSTER CONFIGURATION section - this is which you can input your contact information, and set up the Cloudera Manager credentials prior to deployment.
+How should I use Data Collector?
 
-## Deployment
+Use StreamSets Data Collector like a pipe for a data stream. Throughout your enterprise data topology, you have streams of data that you need to move, collect, and process on the way to their destinations. Data Collector provides the crucial connection between hops in the stream.
 
-Deploy using standard Terraform commands
+To solve your ingest needs, you can use a single Data Collector to run one or more pipelines. Or you might install a series of Data Collectors to stream data across your enterprise data topology.
 
-        terraform init && terraform plan && terraform apply
 
-## Post Deployment
+How does this really work?
+	
+Let's walk through it...
 
-Post deployment is automated using a scripted process that uses the Bash and Cloudera Manager API via Python.  Clusters are preconfigured with tunings based around instance type (in the cmx.py script).  Log in to the Bastion host after Terraform completes, then run the following commands to watch installation progress.  The public IP will output as a result of the Terraform completion:
+After you install and launch Data Collector, you use the Data Collector UI to log in and create your first pipeline.
 
-        ssh -i ~/.ssh/id_rsa opc@<public_ip_of_bastion>
-        sudo su -
-        screen -r
+What do you want it to do? Let's say you want to read XML files from a directory and remove the newline characters before moving it into HDFS. To do this, you start with a Directory origin stage and configure it to point to the source file directory. (You can also have the stage archive processed files and write files that were not fully processed to a separate directory for review.)
 
-Cluster provisioning can take up to half an hour.  After SCM setup is complete, you can monitor progress  directly using the Cloudera Manager UI.  The URL for this is also output as part of the Terraform provisioning process.
+To remove the newline characters, connect Directory to an Expression Evaluator processor and configure it to remove the newline character from the last field in the record.
 
-## Security and Post-Deployment Auditing
+To make the data available to HDFS, you connect the Expression Evaluator to a Hadoop FS destination stage. You configure the stage to write the data as a JSON object (though you can use other data formats as well).
 
-Note that as part of this deployment, ssh keys are used for root level access to provisioned hosts in order to setup software.  The key used is the same as the OPC user which has super-user access to the hosts by default.   If enhanced security is desired, then the following steps should be taken after the Cluster is up and running:
+You preview data to see how source data moves through the pipeline and notice that some fields have missing data. So you add a Field Replacer to replace null values in those fields.
 
-Remove ssh private keys from Utility host 
+Now that the data flow is done, you configure the pipeline error record handling to write error records to a file, you create a data drift alert to let you know when field names change, and you configure an email alert to let you know when the pipeline generates more than 100 error records. Then, you start the pipeline and Data Collector goes to work.
 
-	rm -f /home/opc/.ssh/id_rsa
+The Data Collector goes into Monitor mode and displays summary and error statistics immediately. To get a closer look at the activity, you take a snapshot of the pipeline so you can examine how a set of data passed through the pipeline. You see some unexpected data in the pipeline, so you create a data rule for a link between two stages to gather information about similar data and set an alert to notify you when the numbers get too high.
 
-Replace the authorized_keys file in /root/.ssh/ on all hosts with the backup copy 
+And what about those error records being written to file? They're saved with error details, so you can create an error pipeline to reprocess that data. Et voila!
 
-	sudo mv /root/.ssh/authorized_keys.bak /root/.ssh/authorized_keys
+StreamSets Data Collector is a powerful tool, but we're making it as simple as possible to use. So give it a try, click the Help icon for information, and contact us if you need a hand.
