@@ -10,7 +10,7 @@ variable "ssh_private_key" {}
 
 # Choose an Availability Domain
 variable "availability_domain" {
-  default = "3"
+  default = "1"
 }
 
 variable "instance_image_ocid" {
@@ -115,46 +115,14 @@ resource "oci_core_default_route_table" "DataCollectorRT" {
   }
 }
 
-# Gets a list of vNIC attachments on the instance
-data "oci_core_vnic_attachments" "InstanceVnics" {
-  compartment_id      = "${var.compartment_ocid}"
-  availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.availability_domain - 1],"name")}"
-  instance_id         = "${oci_core_instance.DataCollector.id}"
-}
 
-# Gets the OCID of the first (default) vNIC
-data "oci_core_vnic" "InstanceVnic" {
-  vnic_id = "${lookup(data.oci_core_vnic_attachments.InstanceVnics.vnic_attachments[0],"vnic_id")}"
-}
-
-
-##Compute
+#Compute
 
 resource "oci_core_instance" "DataCollector" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.availability_domain - 1],"name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "DataCollector"
   shape               = "${var.instance_shape}"
-
-provisioner "remote-exec" {
-      connection {
-        type = "ssh"
-        port = "22"
-        agent = false
-        timeout = "5m"
-        host = "data.oci_core_vnic.InstanceVnic.public_ip_address"
-        user = "opc"
-        private_key = "${var.ssh_private_key}"
-      }
-      inline = [
-  "wget https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.0/rpm/el7/streamsets-datacollector-3.5.0-el7-all-rpms.tar--2018-10-04 15:45:46--  https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.0/rpm/el7/streamsets-datacollector-3.5.0-el7-all-rpms.tar",
-  "tar xf streamsets-datacollector-3.5.0-el7-all-rpms.tar",
-  "yum localinstall streamsets-datacollector-3.5.0-1.noarch.rpm",
-  "systemctl start sdc",
-  "echo The default username and password are admin and admin",
-  "echo Browse to http://<system-ip>:18630/"
-  ]
-    }
 
   create_vnic_details {
     subnet_id        = "${oci_core_subnet.sdcSubnet.id}"
@@ -176,6 +144,13 @@ provisioner "remote-exec" {
     create = "60m"
   }
 }
+
+
+
+
+
+
+
 
 
 resource "oci_core_instance_console_connection" "test_instance_console_connection" {
