@@ -1,19 +1,19 @@
 ### Authentication details
-export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1..aaaaaaaaebxriz7y7egelwfkjdbnjdvq6k5vaaxo3o35fvfzf3g7ryvxevka"
-export TF_VAR_user_ocid="ocid1.user.oc1..aaaaaaaaeb2cuehuezqfldf2uifz2vksv5it3uwysuxglakoooaivzmyhq6a"
-export TF_VAR_fingerprint="b8:7c:36:3a:c2:80:05:b8:a2:43:39:01:09:f9:5e:39"
-export TF_VAR_private_key_path="/Users/michaelcarley/Desktop/SSH_keys/oracle_terraform/oci_api_key.pem"
+export TF_VAR_tenancy_ocid=""
+export TF_VAR_user_ocid=""
+export TF_VAR_fingerprint=""
+export TF_VAR_private_key_path=""
 
 ### Region
-export TF_VAR_region="us-phoenix-1"
+export TF_VAR_region=""
 
 ### Compartment
-export TF_VAR_compartment_ocid="ocid1.compartment.oc1..aaaaaaaapdd2bm7bohozrplwmcygeenb2xkwmojntn2gv4f6pzi5y6i7hmoa"
+export TF_VAR_compartment_ocid=""
 
 ### Public/private keys used on the instance
-export TF_VAR_ssh_public_key=$(cat ~/Desktop/SSH_keys/oracle_terraform/id_rsa.pub)
-export TF_VAR_ssh_private_key=$(cat ~/Desktop/SSH_keys/oracle_terraform/id_rsa)
+export TF_VAR_ssh_public_key=$(cat ~/Path here)
+export TF_VAR_ssh_private_key=$(cat ~/Path here)
 
 ## AD
-export TF_VAR_AD="2"
+export TF_VAR_AD="1"
 
