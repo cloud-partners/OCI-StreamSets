@@ -12,7 +12,7 @@ The folder titled, "SDC Standalone with EDH Cluster", will create single SDC ins
 
 The folder titled, "SDC via CDH Parcel Manager", will create SDC instances on all the worker nodes in the cluster and enable things like clustered execution of pipelines or REST-based microservices pipelines. This is not currently production ready and is still in development but stay tuned!
 						
-						What is StreamSets Data Collector?
+					What is StreamSets Data Collector?
 StreamSets Data Collector is a lightweight, powerful design and execution engine that streams data in real time. Data Collector is used to route and process data in your data streams from almost any origin to almost any source.
 
 To define the flow of data, you design a pipeline in Data Collector. A pipeline consists of stages that represent the origin and destination of the pipeline, and any additional processing that you want to perform. After you design the pipeline, you click Start and Data Collector goes to work.
@@ -20,13 +20,13 @@ To define the flow of data, you design a pipeline in Data Collector. A pipeline 
 Data Collector processes data when it arrives at the origin and waits quietly when not needed. You can view real-time statistics about your data, inspect data as it passes through the pipeline, or take a close look at a snapshot of data.
 
 
-						How should I use Data Collector?
+					How should I use Data Collector?
 Use StreamSets Data Collector like a pipe for a data stream. Throughout your enterprise data topology, you have streams of data that you need to move, collect, and process on the way to their destinations. Data Collector provides the crucial connection between hops in the stream.
 
 To solve your ingest needs, you can use a single Data Collector to run one or more pipelines. Or you might install a series of Data Collectors to stream data across your enterprise data topology.
 
 
-						How does this really work?
+					How does this really work?
 Let's walk through it...
 
 After you run the terraform script for a standalone Data Collector, you use the Data Collector UI to log in and create your first pipeline.
