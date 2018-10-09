@@ -1,5 +1,7 @@
 # Usage Guide
 
+Please note: This files are a work in progress.
+
 ## PREREQUISITES
 
 Installation has a dependency on Terraform being installed and configured for the user tenancy.   As such an "env-vars" file is included with this package that contains all the necessary environment variables.  This file should be updated with the appropriate values prior to installation.  To source this file prior to installation, either reference it in your .rc file for your shell's or run the following:
