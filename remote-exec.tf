@@ -1,7 +1,7 @@
 resource "null_resource" "StreamSets" {
     depends_on = ["oci_core_instance.DataCollector"]
 
-provisioner "remote-exec" {
+    provisioner "remote-exec" {
       connection {
         type = "ssh"
         port = "22"
@@ -16,9 +16,11 @@ provisioner "remote-exec" {
   "tar -xf streamsets-datacollector-3.5.0-el7-all-rpms.tar",
   "cd streamsets-datacollector-3.5.0-el7-all-rpms/",
   "sudo yum localinstall streamsets-datacollector-3.5.0-1.noarch.rpm -y",
+  "sudo firewall-cmd --zone=public --add-port=18630/tcp --permanent",
+  "sudo systemctl restart firewalld",
   "sudo systemctl start sdc",
   "echo The default username and password are admin and admin",
-  "echo Browse to http://<system-ip>:18630/"
+  "echo Browse to http://${data.oci_core_vnic.datacollector_vnic.public_ip_address}:18630/"
   ]
     }
-    }
+}

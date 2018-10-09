@@ -4,6 +4,13 @@
 2. Edit "env-vars" file with the appropriate values from your OCI account & tenancy information.
 3. Source the "env-vars" file using the command: "source env-vars"
 4. Deploy using standard terraform commands: "terraform init && terraform plan && terraform apply"
+
+
+
+Data Collector Web Console 
+
+![](./images/metrics_Capture.PNG)
+
 			
 						 Getting Started
 Welcome! In this repository are the Terraform scripts that will preform the setup of the StreamSets Data Collector (SDC) to ingest data rapidly and easily. In the the current level of this directory are the Terraform files that create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.

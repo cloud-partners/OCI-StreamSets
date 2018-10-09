@@ -148,21 +148,17 @@ resource "oci_core_instance" "DataCollector" {
 
 
 
-
-
-
-
-
-resource "oci_core_instance_console_connection" "test_instance_console_connection" {
-  #Required
-  instance_id = "${oci_core_instance.DataCollector.id}"
-  public_key  = "${var.ssh_public_key}"
+output "SSH to Data Collector instance " {
+value = <<END
+        ssh -i ~/.ssh/id_rsa opc@${data.oci_core_vnic.datacollector_vnic.public_ip_address}
+END
 }
 
-output "connect_with_ssh" {
-  value = "${oci_core_instance_console_connection.test_instance_console_connection.connection_string}"
+
+output "Access the Web Console for Data Collector instance " {
+value = <<END
+	http://${data.oci_core_vnic.datacollector_vnic.public_ip_address}:18630/ . The default username and password are admin and admin.  
+END
 }
 
-output "connect_with_vnc" {
-  value = "${oci_core_instance_console_connection.test_instance_console_connection.vnc_connection_string}"
-}
+
