@@ -1,7 +1,5 @@
 
 Data Collector Web Console 
-![](./images/Pipeline_Screenshot.png)
-![](./images/metrics_Capture.PNG)
 			
 						 Getting Started
 
@@ -37,7 +35,10 @@ Let's walk through it...
 
 After you run the terraform script for a standalone SDC, you use the Data Collector UI to log in and create your first pipeline.
 
-What do you want it to do? Let's say you want to read XML files from a directory and remove the newline characters before moving it into HDFS. To do this, you start with a Directory origin stage and configure it to point to the source file directory. (You can also have the stage archive processed files and write files that were not fully processed to a separate directory for review.)
+![](./images/Pipeline_Screenshot.png)
+_example pipeline_
+
+What do you want it to do? Let's say you want to read XML files from a directory and remove the newline characters before moving it into HDFS (see image above). To do this, you start with a Directory origin stage and configure it to point to the source file directory. (You can also have the stage archive processed files and write files that were not fully processed to a separate directory for review.)
 
 To remove the newline characters, connect Directory to an Expression Evaluator processor and configure it to remove the newline character from the last field in the record.
 
@@ -48,6 +49,8 @@ You preview data to see how source data moves through the pipeline and notice th
 Now that the data flow is done, you configure the pipeline error record handling to write error records to a file, you create a data drift alert to let you know when field names change, and you configure an email alert to let you know when the pipeline generates more than 100 error records. Then, you start the pipeline and Data Collector goes to work.
 
 The Data Collector goes into Monitor mode and displays summary and error statistics immediately. To get a closer look at the activity, you take a snapshot of the pipeline so you can examine how a set of data passed through the pipeline. You see some unexpected data in the pipeline, so you create a data rule for a link between two stages to gather information about similar data and set an alert to notify you when the numbers get too high.
+
+![](./images/metrics_Capture.PNG)
 
 And what about those error records being written to file? They're saved with error details, so you can create an error pipeline to reprocess that data. Et voila!
 
