@@ -1,8 +1,12 @@
 						Getting Started
-Welcome! In this repository are a set of terraform scripts that will enable to ingest data rapidly and easily using StreamSets.
+Welcome! In this repository are Terraform scripts that will enable to ingest data rapidly and easily using StreamSets Data Collectors (SDC). At the the current level of this directory will the Terraform files will create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation. 
+
+The folder titled, "SDC Standalone with EDH Cluster", will create single SDC instance ready for data movement inside a Cloudera Enterprise Data Hub. Thise SDC instance will reside on the same subnets as the worker nodes in the cluster. This is mainly for easy development and learning how the StreamSets Data Operations Platform extends to Hadoop infrastructure.
+
+The folder titled, "SDC via CDH Parcel Manager", will create SDC instances on all the worker nodes in the cluster and enable things like clustered execution of pipelines or REST-based microservices pipelines. This is not currently production ready and is still in development but stay tuned!
 						
 						What is StreamSets Data Collector?
-StreamSets Data CollectorTM is a lightweight, powerful design and execution engine that streams data in real time. Use Data Collector to route and process data in your data streams.
+StreamSets Data Collector is a lightweight, powerful design and execution engine that streams data in real time. Data Collector is used to route and process data in your data streams from almost any origin to almost any source.
 
 To define the flow of data, you design a pipeline in Data Collector. A pipeline consists of stages that represent the origin and destination of the pipeline, and any additional processing that you want to perform. After you design the pipeline, you click Start and Data Collector goes to work.
 
