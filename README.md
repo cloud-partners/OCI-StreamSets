@@ -2,34 +2,34 @@
 ## PREREQUISITES
 1. Make sure Terraform has been installed and configured. 
 2. Edit "env-vars" file with the appropriate values from your OCI account & tenancy information.
-3. Source the "env-vars" file using the comman: "source env-vars"
+3. Source the "env-vars" file using the command: "source env-vars"
 4. Deploy using standard terraform commands: "terraform init && terraform plan && terraform apply"
 			
 						 Getting Started
-Welcome! In this repository are Terraform scripts that will enable to ingest data rapidly and easily using StreamSets Data Collectors (SDC). At the the current level of this directory will the Terraform files will create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.
+Welcome! In this repository are the Terraform scripts that will preform the setup of the StreamSets Data Collector (SDC) to ingest data rapidly and easily. In the the current level of this directory are the Terraform files that create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.
 
-The folder titled, "SDC Standalone with EDH Cluster", will create single SDC instance ready for data movement inside a Cloudera Enterprise Data Hub. Thise SDC instance will reside on the same subnets as the worker nodes in the cluster. This is mainly for easy development and learning how the StreamSets Data Operations Platform extends to Hadoop infrastructure.
+The folder titled, "SDC Standalone with EDH Cluster", will create single SDC instance ready for data movement inside a Cloudera Enterprise Data Hub. This SDC instance will reside in the same subnet(s) as the worker nodes in the cluster. This is mainly for easy development and learning how the StreamSets Data Operations Platform extends to Hadoop infrastructure.
 
 The folder titled, "SDC via CDH Parcel Manager", will create SDC instances on all the worker nodes in the cluster and enable things like clustered execution of pipelines or REST-based microservices pipelines. This is not currently production ready and is still in development but stay tuned!
 						
-					What is StreamSets Data Collector?
-StreamSets Data Collector is a lightweight, powerful design and execution engine that streams data in real time. Data Collector is used to route and process data in your data streams from almost any origin to almost any source.
+					What is the StreamSets Data Collector?
+StreamSets Data Collector is a lightweight, powerful design and execution engine that streams data in real time. SDC is used to route and process data in your data streams from almost any origin to almost any source.
 
-To define the flow of data, you design a pipeline in Data Collector. A pipeline consists of stages that represent the origin and destination of the pipeline, and any additional processing that you want to perform. After you design the pipeline, you click Start and Data Collector goes to work.
+To define the flow of data, you design a pipeline in SDC. A pipeline consists of one or more stages that represents the origin(s) and destination of the pipeline, as well as any additional processing that you want to perform. After you design the pipeline, you can preview it to assist with debugging.  When ready to run the pipeline live, you click Start and the SDC goes to work.
 
-Data Collector processes data when it arrives at the origin and waits quietly when not needed. You can view real-time statistics about your data, inspect data as it passes through the pipeline, or take a close look at a snapshot of data.
+Once SDC is running, it processes the data when it arrives at the origin and waits quietly when not needed. You can view real-time statistics about your data, inspect data as it passes through the pipeline, or take a closer look at a snapshot of data.
 
 
-					How should I use Data Collector?
-Use StreamSets Data Collector like a pipe for a data stream. Throughout your enterprise data topology, you have streams of data that you need to move, collect, and process on the way to their destinations. Data Collector provides the crucial connection between hops in the stream.
+					How should I use SDC?
+Use SDC like a pipe for a data stream. Throughout your enterprise data topology, you have streams of data that you need to move, collect, and process on the way to their destinations. SDC provides the crucial connection between hops in the stream.
 
-To solve your ingest needs, you can use a single Data Collector to run one or more pipelines. Or you might install a series of Data Collectors to stream data across your enterprise data topology.
+To solve your ingest needs, you can use a single SDC to run one or more pipelines. Or you might install a series of Data Collectors to stream data across your enterprise data topology.
 
 
 					How does this really work?
 Let's walk through it...
 
-After you run the terraform script for a standalone Data Collector, you use the Data Collector UI to log in and create your first pipeline.
+After you run the terraform script for a standalone SDC, you use the Data Collector UI to log in and create your first pipeline.
 
 What do you want it to do? Let's say you want to read XML files from a directory and remove the newline characters before moving it into HDFS. To do this, you start with a Directory origin stage and configure it to point to the source file directory. (You can also have the stage archive processed files and write files that were not fully processed to a separate directory for review.)
 
