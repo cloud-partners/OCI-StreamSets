@@ -8,7 +8,7 @@
 
 
 Data Collector Web Console 
-
+![](./images/Pipeline_Screenshot.png)
 ![](./images/metrics_Capture.PNG)
 
 			
