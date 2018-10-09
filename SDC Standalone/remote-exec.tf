@@ -12,11 +12,12 @@ provisioner "remote-exec" {
         user = "opc"
         private_key = "${var.ssh_private_key}"
       }
-      inline = [
+       inline = [
   "wget https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.0/rpm/el7/streamsets-datacollector-3.5.0-el7-all-rpms.tar--2018-10-04 15:45:46--  https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.0/rpm/el7/streamsets-datacollector-3.5.0-el7-all-rpms.tar",
-  "tar xf streamsets-datacollector-3.5.0-el7-all-rpms.tar",
-  "yum localinstall streamsets-datacollector-3.5.0-1.noarch.rpm",
-  "systemctl start sdc",
+  "tar -xf streamsets-datacollector-3.5.0-el7-all-rpms.tar",
+  "cd streamsets-datacollector-3.5.0-el7-all-rpms/",
+  "sudo yum localinstall streamsets-datacollector-3.5.0-1.noarch.rpm -y",
+  "sudo systemctl start sdc",
   "echo The default username and password are admin and admin",
   "echo Browse to http://<system-ip>:18630/"
   ]
