@@ -1,5 +1,12 @@
+
+## PREREQUISITES
+1. Make sure Terraform has been installed and configured. 
+2. Edit "env-vars" file with the appropriate values from your OCI account & tenancy information.
+3. Source the "env-vars" file using the comman: "source env-vars"
+4. Deploy using standard terraform commands: "terraform init && terraform plan && terraform apply"
+			
 						Getting Started
-Welcome! In this repository are Terraform scripts that will enable to ingest data rapidly and easily using StreamSets Data Collectors (SDC). At the the current level of this directory will the Terraform files will create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation. 
+Welcome! In this repository are Terraform scripts that will enable to ingest data rapidly and easily using StreamSets Data Collectors (SDC). At the the current level of this directory will the Terraform files will create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.
 
 The folder titled, "SDC Standalone with EDH Cluster", will create single SDC instance ready for data movement inside a Cloudera Enterprise Data Hub. Thise SDC instance will reside on the same subnets as the worker nodes in the cluster. This is mainly for easy development and learning how the StreamSets Data Operations Platform extends to Hadoop infrastructure.
 
