@@ -1,10 +1,6 @@
 # oci-streamsets
 Included here are Terraform template to deploy StreamSets on Oracle Cloud Infrastructure (OCI).
 
-Data Collector Web Console 
-![](./images/Pipeline_Screenshot.png)
-![](./images/metrics_Capture.PNG)
-
 			
 Getting Started
 
@@ -39,7 +35,7 @@ Now, you'll want a local copy of this repo.  You can make that with the commands
 
 
 ## Update Template Configuration
-Update environment variables in config file: [env-vars](https://github.com/cloud-partners/oci-streamsets/blob/master//env-vars)  to specify your OCI account details like tenancy_ocid, user_ocid, compartment_ocid. To source this file prior to installation, either reference it in your .rc file for your shell's or run the following:
+Update environment variables in config file: [env-vars](https://github.com/cloud-partners/oci-streamsets/blob/master/env-vars)  to specify your OCI account details like tenancy_ocid, user_ocid, compartment_ocid. To source this file prior to installation, either reference it in your .rc file for your shell's or run the following:
 
         source env-vars
 
