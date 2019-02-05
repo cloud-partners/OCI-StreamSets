@@ -1,11 +1,9 @@
 # oci-streamsets
 Included here are Terraform template to deploy StreamSets on Oracle Cloud Infrastructure (OCI).
-
 			
-Getting Started
+# Getting Started
 
-Welcome! In this current folder are the Terraform scripts that will preform the setup of the StreamSets Data Collector (SDC) to ingest data rapidly and easily. In the the current level of this directory are the Terraform files that create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.
-
+Welcome! This folder contains Terraform scripts that setup the StreamSets Data Collector (SDC) to ingest data rapidly and easily. In the the current level of this directory are the Terraform files that create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.
 
 The folder titled, "SDC Standalone with EDH Cluster", will create single SDC instance ready for data movement inside a Cloudera Enterprise Data Hub. This SDC instance will reside in the same subnet(s) as the worker nodes in the cluster. This is mainly for easy development and learning how the StreamSets Data Operations Platform extends to Hadoop infrastructure.
 
@@ -13,8 +11,7 @@ The folder titled, "SDC via CDH Parcel Manager", will create SDC instances on al
 
 ## Standalone StreamSets Data Collector Architecture
 
-![](./images/OCI_Arch_StreamSets_SDC_Capture.PNG)
-				
+![](./images/OCI_Arch_StreamSets_SDC_Capture.PNG)		
 
 ## Prerequisites
 In addition to an active tenancy on OCI, you will need a functional installation of Terraform, and an API key for a privileged user in the tenancy.  See these documentation links for more information:
@@ -25,7 +22,6 @@ In addition to an active tenancy on OCI, you will need a functional installation
 
 Once the pre-requisites are in place, you will need to copy the templates from this repository to where you have Terraform installed.
 
-
 ## Clone the Terraform template
 Now, you'll want a local copy of this repo.  You can make that with the commands:
 
@@ -33,20 +29,16 @@ Now, you'll want a local copy of this repo.  You can make that with the commands
     cd oci-streamsets
     ls
 
-
 ## Update Template Configuration
 Update environment variables in config file: [env-vars](https://github.com/cloud-partners/oci-streamsets/blob/master/env-vars)  to specify your OCI account details like tenancy_ocid, user_ocid, compartment_ocid. To source this file prior to installation, either reference it in your .rc file for your shell's or run the following:
 
         source env-vars
-
-
 
 ## Deployment & Post Deployment
 
 Deploy using standard Terraform commands
 
         terraform init && terraform plan && terraform apply
-
 
 ## SSH to SDC Node
 When terraform apply is complete, the terminal console will display the public ip address for first broker and worker node.  The default login is opc.  You can SSH into the machine with a command like this:
@@ -55,14 +47,9 @@ When terraform apply is complete, the terminal console will display the public i
 
         http://${data.oci_core_vnic.datacollector_vnic.public_ip_address}:18630/ The default username and password are admin and admin.
 
-
-
 ## Data Collector Web Console
 ![](./images/Pipeline_Screenshot.png)
 ![](./images/metrics_Capture.PNG)
-
-
-
 
 ## What is the StreamSets Data Collector?
 StreamSets Data Collector is a lightweight, powerful design and execution engine that streams data in real time. SDC is used to route and process data in your data streams from almost any origin to almost any source.
@@ -71,12 +58,10 @@ To define the flow of data, you design a pipeline in SDC. A pipeline consists of
 
 Once SDC is running, it processes the data when it arrives at the origin and waits quietly when not needed. You can view real-time statistics about your data, inspect data as it passes through the pipeline, or take a closer look at a snapshot of data.
 
-
 ## How should I use SDC?
 Use SDC like a pipe for a data stream. Throughout your enterprise data topology, you have streams of data that you need to move, collect, and process on the way to their destinations. SDC provides the crucial connection between hops in the stream.
 
 To solve your ingest needs, you can use a single SDC to run one or more pipelines. Or you might install a series of Data Collectors to stream data across your enterprise data topology.
-
 
 ## How does this really work?
 Let's walk through it...
@@ -98,5 +83,3 @@ The Data Collector goes into Monitor mode and displays summary and error statist
 And what about those error records being written to file? They're saved with error details, so you can create an error pipeline to reprocess that data. Et voila!
 
 StreamSets Data Collector is a powerful tool, but we're making it as simple as possible to use. So give it a try, click the Help icon for information, and contact us if you need a hand. For more use cases or examples to learn on, please visit: https://github.com/streamsets/tutorials
-
-
