@@ -1,5 +1,5 @@
 # oci-streamsets
-Included here are Terraform template to deploy StreamSets on Oracle Cloud Infrastructure (OCI).
+These are Terraform modules that deploy [Streamsets](https://streamsets.com/) on [Oracle Cloud Infrastructure (OCI)](https://cloud.oracle.com/en_US/cloud-infrastructure).  They are developed jointly by Oracle and StreamSets.
 			
 # Getting Started
 
