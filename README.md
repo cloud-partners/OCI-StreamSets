@@ -1,5 +1,5 @@
 # oci-streamsets
-These are Terraform modules that deploy [Streamsets](https://streamsets.com/) on [Oracle Cloud Infrastructure (OCI)](https://cloud.oracle.com/en_US/cloud-infrastructure).  They are developed jointly by Oracle and StreamSets. For instructions on how to use this material and details on getting support from the vendor that maintains this material, please contact them directly.
+These are Terraform modules that deploy [Streamsets](https://streamsets.com/) on [Oracle Cloud Infrastructure (OCI)](https://cloud.oracle.com/en_US/cloud-infrastructure).  They are developed jointly by Oracle and StreamSets.
 			
 ## Getting Started
 Welcome! This folder contains Terraform scripts that setup the StreamSets Data Collector (SDC) to ingest data rapidly and easily. In the the current level of this directory are the Terraform files that create a single compute instance running one data collector. This is commonly used for learning or developing on the StreamSets Data Operations Platform. However, it can be used for production ready data movement and transformation.
