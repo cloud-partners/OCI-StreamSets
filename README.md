@@ -23,7 +23,7 @@ Once the pre-requisites are in place, you will need to copy the templates from t
 ## Clone the Terraform template
 Now, you'll want a local copy of this repo.  You can make that with the commands:
 
-    git clone https://github.com/cloud-partners/oci-streamsets.git
+    git clone https://github.com/oracle-quickstart/oci-streamsets.git
     cd oci-streamsets
     ls
 
@@ -36,13 +36,14 @@ Update environment variables in config file: [env-vars](https://github.com/cloud
 
 Deploy using standard Terraform commands
 
-        terraform init && terraform plan && terraform apply
+        terraform init
+	terraform plan
+	terraform apply
 
 ## SSH to SDC Node
 When terraform apply is complete, the terminal console will display the public ip address for first broker and worker node.  The default login is opc.  You can SSH into the machine with a command like this:
 
         ssh -i ~/.ssh/id_rsa opc@${data.oci_core_vnic.datacollector_vnic.public_ip_address}
-
         http://${data.oci_core_vnic.datacollector_vnic.public_ip_address}:18630/ The default username and password are admin and admin.
 
 ## Data Collector Web Console
