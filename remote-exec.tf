@@ -12,13 +12,14 @@ resource "null_resource" "StreamSets" {
       private_key = var.ssh_private_key
     }
     inline = [
-      "wget https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.0/rpm/el7/streamsets-datacollector-3.5.0-el7-all-rpms.tar--2018-10-04 15:45:46--  https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.5.0/rpm/el7/streamsets-datacollector-3.5.0-el7-all-rpms.tar",
-      "tar -xf streamsets-datacollector-3.5.0-el7-all-rpms.tar",
-      "cd streamsets-datacollector-3.5.0-el7-all-rpms/",
-      "sudo yum localinstall streamsets-datacollector-3.5.0-1.noarch.rpm -y",
+      "wget https://s3-us-west-2.amazonaws.com/archives.streamsets.com/datacollector/3.12.0/rpm/el7/streamsets-datacollector-3.12.0-el7-all-rpms.tar",
+      "tar -xf streamsets-datacollector-3.12.0-el7-all-rpms.tar",
+      "cd streamsets-datacollector-3.12.0-el7-all-rpms/",
+      "sudo yum localinstall streamsets-datacollector-3.12.0-1.noarch.rpm -y",
       "sudo chown -R sdc:sdc /etc/sdc",
       "sudo mkdir -p /var/lib/sdc-resources",
       "sudo chown -R sdc:sdc  /var/lib/sdc-resources",
+      "sudo chown -R sdc:sdc /opt/streamsets-datacollector",
       "sudo firewall-cmd --zone=public --add-port=18630/tcp --permanent",
       "sudo systemctl restart firewalld",
       "sudo systemctl start sdc",
@@ -27,4 +28,3 @@ resource "null_resource" "StreamSets" {
     ]
   }
 }
-
