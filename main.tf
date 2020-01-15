@@ -27,16 +27,22 @@ variable "availability_domain" {
   default = "1"
 }
 
+// See https://docs.cloud.oracle.com/iaas/images/image/cc839b42-1566-4d87-92c3-dbb5945299c7/
+// Oracle-provided image "Oracle-Linux-7.7-2019.12.18-0"
 variable "instance_image_ocid" {
-  type = map(string)
-
+  type = "map"
   default = {
-    // See https://docs.us-phoenix-1.oraclecloud.com/images/
-    // Oracle-provided image "Oracle-Linux-7.4-2018.02.21-1"
-    us-phoenix-1   = "ocid1.image.oc1.phx.aaaaaaaaupbfz5f5hdvejulmalhyb6goieolullgkpumorbvxlwkaowglslq"
-    us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaajlw3xfie2t5t52uegyhiq2npx7bqyu4uvi2zyu3w3mqayc2bxmaa"
-    eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7d3fsb6272srnftyi4dphdgfjf6gurxqhmv6ileds7ba3m2gltxq"
-    uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaaa6h6gj6v4n56mqrbgnosskq63blyv2752g36zerymy63cfkojiiq"
+    ap-mumbai-1    = "ocid1.image.oc1.ap-mumbai-1.aaaaaaaaka7f3qhfuobx2s7dqfgbcx5klllh5xlflbgzb5pymqsnuphehk2a",
+    ap-seoul-1     = "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
+    ap-sydney-1    = "ocid1.image.oc1.ap-sydney-1.aaaaaaaazy24niulp5e5a5oyaadjrwnwoa2g6f2hay2f26dqy63pn5sljjma",
+    ap-tokyo-1     = "ocid1.image.oc1.ap-tokyo-1.aaaaaaaarl7op6ken6hpevfwuevfnt6ic3tlhitu7pct2py5uxdzyvqb5mkq",
+    ca-toronto-1   = "ocid1.image.oc1.ca-toronto-1.aaaaaaaa6wg3hkw7qxwgysuv5c3fuhtyau5cps4ktmjgxvdtxk6ajtf23fcq",
+    eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaalljvzqt3aw7cwpls3oqx7dyrcuntqfj6xn3a2ul3jiuby27lqdxa",
+    eu-zurich-1    = "ocid1.image.oc1.eu-zurich-1.aaaaaaaaf2fwfgbpxz2g3boettl3q6tow7efs34v2t2t5r45yuydvkqm32ha",
+    sa-saopaulo-1  = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaatwrc37cesjtgx3gm4vzq6ocpedgzxjystewc2a7stnv2ydcoiquq",
+    uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaagwdcgcw4squjusjy4yoyzxlewn6omj75f2xur2qpo7dgwexnzyhq",
+    us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaaxrcvnpfxfsyzv3ytuu6swalnbmocneej6yj4nr4vbcoufgmfpwqq",
+    us-phoenix-1   = "ocid1.image.oc1.phx.aaaaaaaactxf4lnfjj6itfnblee3g3uckamdyhqkwfid6wslesdxmlukqvpa"
   }
 }
 
@@ -70,7 +76,7 @@ resource "oci_core_security_list" "sdcSecList" {
   display_name   = "sdcSecList"
   egress_security_rules {
     destination = "0.0.0.0/0"
-    protocol    = "6"
+    protocol    = "all"
   }
 
   ingress_security_rules {
@@ -151,6 +157,15 @@ resource "oci_core_instance" "DataCollector" {
 
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
+    user_data = base64encode(
+      join(
+        "\n",
+        [
+          "#!/usr/bin/env bash",
+          file("./scripts/config.sh")
+        ],
+      ),
+    )
   }
 
   timeouts {
