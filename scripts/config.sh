@@ -24,6 +24,7 @@ chown -R sdc:sdc /etc/sdc
 mkdir -p /var/lib/sdc-resources
 chown -R sdc:sdc  /var/lib/sdc-resources
 chown -R sdc:sdc /opt/streamsets-datacollector
+systemctl enable sdc
 echo "Stop firewalld"
 systemctl stop firewalld
 echo "systemctl is-active firewalld"
